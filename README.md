@@ -10,6 +10,4 @@ Bu sistem ile öğrenciler istedikleri yazarların istediği kitabına ulaşabil
 Bu proje ile amaçladığım insanların kolaylıkla web tabanlı bir sistem ile internetten birçok kaynak ile erişebildiği bir kitaba tek bir sistem ile ulaşabilmesi.
 Bu yapacağım sistemin avantajı kütüphanede 2 tane yönetim paneli olacak admin ve kullanıcı birbirinden bağımsız olarak anlık işlem sağlayabilecekler.
 
-https://web.microsoftstream.com/video/43fb811a-aa52-4e35-ad2c-96699e04e398?list=studio
-
 https://www.youtube.com/watch?v=65TmekQk51k
