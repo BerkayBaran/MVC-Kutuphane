@@ -1,0 +1,47 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Kitaplar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutKullanici.cshtml";
+}
+
+<h2>Sistemde olan Kitaplar</h2>
+
+@using (Html.BeginForm("Index", "KitapIslemleri", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak kitap adini giriniz: &nbsp</b> @Html.TextBox("parametre")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <td>Kitap Adi</td>
+        <td>Sayfa Sayisi</td>
+        <td>Yazari</td>
+        <td>Kategori</td>
+        <td>Yayin Evi</td>
+        <td>Basim Yili</td>
+    </tr>
+    @foreach (var k in Model)
+    {
+        if (k.Durum == true) { 
+        <tr>
+            <td>@k.Kitap_Adi</td>
+            <td>@k.Sayfa_Sayisi</td>
+            <td><a class="nav-link js-scroll-trigger" href="/KitapIslemleri/Yazarlar">@k.TBL_Yazar.Yazar_Adi &nbsp @k.TBL_Yazar.Yazar_Soyad</a></td>
+            <td><a class="nav-link js-scroll-trigger" href="/KategoriIslemleri/Index">@k.TBL_Kategori.Kategori_Adi</a></td>
+            <td>@k.Yayin_Evi</td>
+            <td>@k.Basim_Yili</td>
+        </tr>
+        }
+        else
+        {
+            @Html.Display("Hata");
+        }
+
+    }
+</table>
+

@@ -1,0 +1,41 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Yazar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Yazarlar</h2>
+
+@using (Html.BeginForm("Index", "Yazar", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak Yazar adini giriniz: &nbsp</b> @Html.TextBox("y")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>Adi</td>
+        <td>Soyadi</td>
+        <td>Kitap Sayisi</td>
+        <td>Detay</td>
+        <td>Sil</td>
+        <td>Guncelle</td>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.ID</td>
+            <td>@c.Yazar_Adi</td>
+            <td>@c.Yazar_Soyad</td>
+            <td>@c.Kitap_Sayisi</td>
+            <td>@c.Detay</td>
+            <td>@Html.ActionLink("Sil", "YazarSil", new { id = c.ID }, new { @class = "btn btn-danger", onClick = "return confirm('Silmek Istiyor Musunuz?')" })</td>
+            <td><a href="/Yazar/YazarGetir/@c.ID" class="btn btn-success">Guncelle</a></td>
+        </tr>
+    }
+</table>
+<a class="btn btn-primary" href="/Yazar/YazarEkle">Yeni Yazar Ekle</a>

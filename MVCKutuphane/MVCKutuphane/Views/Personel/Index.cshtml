@@ -1,0 +1,46 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Personeller</h2>
+
+@using (Html.BeginForm("Index", "Personel", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak Personel adini giriniz: &nbsp</b> @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Personel ID</th>
+        <th>Personel Adi</th>
+        <th>Personel Soyadi</th>
+        <th>Kullanici Adi</th>
+        <th>Durum</th>
+        <th>Sifre</th>
+        <th>Sil</th>
+        <th>Guncelle</th>
+    </tr>
+    @foreach (var personel in Model)
+    {
+        <tr>
+            <td>@personel.ID</td>
+            <td>@personel.Personel_Adi</td>
+            <td>@personel.Personel_Soyadi</td>
+            <td>@personel.Personel_Kullanci_Adi</td>
+            <td>@personel.Durum</td>
+            <td>@personel.Sifre</td>
+            <td>@Html.ActionLink("Sil", "PersonelSil", new { id = personel.ID }, new { @class = "btn btn-danger", onClick = "return confirm('Silmek Istiyor Musunuz?')" })</td>
+            <td><a href="/Personel/PersonelGetir/@personel.ID" class="btn btn-success">Guncelle</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Personel/PersonelEkle/" class="btn btn-primary">Yeni Personel Ekle</a>
+

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBKutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TBL_Kategoriler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Kategori_Adi" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_Kitaplar" Relationship="Self.FK_TBL_Kitaplar_TBL_Kategoriler" FromRole="TBL_Kategoriler" ToRole="TBL_Kitaplar" />
+  </EntityType>
+  <EntityType Name="TBL_Kitaplar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Kitap_Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Yazar_ID" Type="Int32" />
+    <Property Name="Kategori_ID" Type="Int32" />
+    <Property Name="Sayfa_Sayisi" Type="Int32" />
+    <Property Name="Yayin_Evi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Basim_Yili" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_Kategoriler" Relationship="Self.FK_TBL_Kitaplar_TBL_Kategoriler" FromRole="TBL_Kitaplar" ToRole="TBL_Kategoriler" />
+    <NavigationProperty Name="TBL_Yazar" Relationship="Self.FK_TBL_Kitaplar_TBL_Yazar" FromRole="TBL_Kitaplar" ToRole="TBL_Yazar" />
+    <NavigationProperty Name="TBL_OduncKitap" Relationship="Self.FK_TBL_OduncKitap_TBL_Kitaplar" FromRole="TBL_Kitaplar" ToRole="TBL_OduncKitap" />
+  </EntityType>
+  <EntityType Name="TBL_OduncKitap">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Kitap_ID" Type="Int32" />
+    <Property Name="Uye_ID" Type="Int32" />
+    <Property Name="Personel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Alis_Tarihi" Type="DateTime" Precision="0" />
+    <Property Name="Iade_Tarihi" Type="DateTime" Precision="0" />
+    <Property Name="Teslim_Tarihi" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="TBL_Kitaplar" Relationship="Self.FK_TBL_OduncKitap_TBL_Kitaplar" FromRole="TBL_OduncKitap" ToRole="TBL_Kitaplar" />
+    <NavigationProperty Name="TBL_Uyeler" Relationship="Self.FK_TBL_OduncKitap_TBL_Uyeler" FromRole="TBL_OduncKitap" ToRole="TBL_Uyeler" />
+  </EntityType>
+  <EntityType Name="TBL_Uyeler">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Uye_Adi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Uye_Soyadi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Uye_Mail" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Kullanici_Adi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_OduncKitap" Relationship="Self.FK_TBL_OduncKitap_TBL_Uyeler" FromRole="TBL_Uyeler" ToRole="TBL_OduncKitap" />
+  </EntityType>
+  <EntityType Name="TBL_Yazar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Yazar_Adi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Yazar_Soyadi" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Kategori_Sayisi" Type="Int32" />
+    <Property Name="Kitap_Sayisi" Type="Int32" />
+    <Property Name="Durum" Type="Boolean" />
+    <NavigationProperty Name="TBL_Kitaplar" Relationship="Self.FK_TBL_Kitaplar_TBL_Yazar" FromRole="TBL_Yazar" ToRole="TBL_Kitaplar" />
+  </EntityType>
+  <Association Name="FK_TBL_Kitaplar_TBL_Kategoriler">
+    <End Role="TBL_Kategoriler" Type="Self.TBL_Kategoriler" Multiplicity="0..1" />
+    <End Role="TBL_Kitaplar" Type="Self.TBL_Kitaplar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kategoriler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_Kitaplar">
+        <PropertyRef Name="Kategori_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_Kitaplar_TBL_Yazar">
+    <End Role="TBL_Yazar" Type="Self.TBL_Yazar" Multiplicity="0..1" />
+    <End Role="TBL_Kitaplar" Type="Self.TBL_Kitaplar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Yazar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_Kitaplar">
+        <PropertyRef Name="Yazar_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_OduncKitap_TBL_Kitaplar">
+    <End Role="TBL_Kitaplar" Type="Self.TBL_Kitaplar" Multiplicity="0..1" />
+    <End Role="TBL_OduncKitap" Type="Self.TBL_OduncKitap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Kitaplar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_OduncKitap">
+        <PropertyRef Name="Kitap_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBL_OduncKitap_TBL_Uyeler">
+    <End Role="TBL_Uyeler" Type="Self.TBL_Uyeler" Multiplicity="0..1" />
+    <End Role="TBL_OduncKitap" Type="Self.TBL_OduncKitap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_Uyeler">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TBL_OduncKitap">
+        <PropertyRef Name="Uye_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBKutuphaneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TBL_Kategoriler" EntityType="Self.TBL_Kategoriler" />
+    <EntitySet Name="TBL_Kitaplar" EntityType="Self.TBL_Kitaplar" />
+    <EntitySet Name="TBL_OduncKitap" EntityType="Self.TBL_OduncKitap" />
+    <EntitySet Name="TBL_Uyeler" EntityType="Self.TBL_Uyeler" />
+    <EntitySet Name="TBL_Yazar" EntityType="Self.TBL_Yazar" />
+    <AssociationSet Name="FK_TBL_Kitaplar_TBL_Kategoriler" Association="Self.FK_TBL_Kitaplar_TBL_Kategoriler">
+      <End Role="TBL_Kategoriler" EntitySet="TBL_Kategoriler" />
+      <End Role="TBL_Kitaplar" EntitySet="TBL_Kitaplar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_Kitaplar_TBL_Yazar" Association="Self.FK_TBL_Kitaplar_TBL_Yazar">
+      <End Role="TBL_Yazar" EntitySet="TBL_Yazar" />
+      <End Role="TBL_Kitaplar" EntitySet="TBL_Kitaplar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_OduncKitap_TBL_Kitaplar" Association="Self.FK_TBL_OduncKitap_TBL_Kitaplar">
+      <End Role="TBL_Kitaplar" EntitySet="TBL_Kitaplar" />
+      <End Role="TBL_OduncKitap" EntitySet="TBL_OduncKitap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBL_OduncKitap_TBL_Uyeler" Association="Self.FK_TBL_OduncKitap_TBL_Uyeler">
+      <End Role="TBL_Uyeler" EntitySet="TBL_Uyeler" />
+      <End Role="TBL_OduncKitap" EntitySet="TBL_OduncKitap" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

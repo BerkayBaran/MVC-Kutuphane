@@ -1,0 +1,51 @@
+﻿@model MVCKutuphane.Models.Entity.TBL_Uyeler
+@{
+    ViewBag.Title = "UyeEkle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Kutuphaneden uye ekleme sayfasi</h2>
+
+<form class="form-group" method="post">
+    <div style="margin-top:15px">
+        <label>Uye Adi</label>
+        @Html.TextBoxFor(u => u.Uye_Adi, new { @class = "form-control", maxlength = 15, minlength = 2, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Uye Soyadi</label>
+        @Html.TextBoxFor(u => u.Uye_Soyadi, new { @class = "form-control", maxlength = 20, minlength = 2, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Uye Mail</label>
+        @Html.TextBoxFor(u => u.Uye_Mail, new { @class = "form-control", maxlength = 30, minlength = 12, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Kullanici Adi</label>
+        @Html.TextBoxFor(u => u.Kullanici_Adi, new { @class = "form-control", maxlength = 20, minlength = 4, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Sifre</label>
+        @Html.TextBoxFor(u => u.Sifre, new { @class = "form-control", maxlength = 16, minlength = 8, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Ipucu (Güvenlik sorusu. Evcil hayvaninizin ismi vs.)</label>
+        @Html.TextBoxFor(u => u.ipucu, new { @class = "form-control", maxlength = 100, minlength = 1, required = "" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Cinsiyet (E=Erkek, K=Kadın, B=Belirsiz)</label>
+        @Html.TextBoxFor(u => u.Cinsiyet, new { @class = "form-control", maxlength = 1, minlength = 1, required = "" })
+    </div>
+    @if (ViewBag.Hata == null)
+    {
+        <p class="text-danger">@ViewBag.BasariliKayit</p>
+    }
+    else
+    {
+        <p class="text-danger">@ViewBag.Hata</p>
+    }
+    <div style="margin-top:15px">
+        <button class="btn btn-info" id="BtnEkle">Uye Ekle</button>
+        <input type="hidden" name="Durum" value="True" />
+        <input type="hidden" name="Tur" value=1 />
+    </div>
+</form>

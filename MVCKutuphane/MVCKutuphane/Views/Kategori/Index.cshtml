@@ -1,0 +1,37 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Kategoriler</h2>
+@using (Html.BeginForm("Index", "Kategori", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak Kategori adini giriniz: &nbsp</b> @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kategori Adi</th>
+        <th>Aciklama</th>
+        <th>Sil</th>
+        <th>Guncelle</th>
+    </tr>
+    @foreach (var ktg in Model)
+    {
+        <tr>
+            <td>@ktg.ID</td>
+            <td>@ktg.Kategori_Adi</td>
+            <td>@ktg.Aciklama</td>
+            <td>@Html.ActionLink("Sil", "KategoriSil", new { id = ktg.ID }, new { @class = "btn btn-danger", onClick = "return confirm('Silmek Istiyor Musunuz?')" })</td>
+            <td><a href="/Kategori/KategoriGetir/@ktg.ID" class="btn btn-success">Guncelle</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Kategori/KategoriEkle/" class="btn btn-primary">Yeni Kategori Ekle</a>

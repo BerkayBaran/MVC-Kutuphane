@@ -1,0 +1,49 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Kitaplar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Kitap Islemleri</h2>
+
+@using (Html.BeginForm("Index", "Kitaplar", FormMethod.Get))
+            {
+            <div style="margin-bottom:15px;margin-top:15px;">
+               <b>Aranacak kitap adini giriniz: &nbsp</b> @Html.TextBox("parametre")
+                <input type="submit" value="Ara" />
+            </div>
+            }
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <td>ID</td>
+        <td>Kitap Adi</td>
+        <td>Sayfa Sayisi</td>
+        <td>Yazari</td>
+        <td>Kategori</td>
+        <td>Yayin Evi</td>
+        <td>Basim Yili</td>
+        <td>Durum</td>
+        <td>Sil</td>
+        <td>Guncelle</td>
+    </tr>
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.ID</td>
+            <td>@k.Kitap_Adi</td>
+            <td>@k.Sayfa_Sayisi</td>
+            <td>@k.TBL_Yazar.Yazar_Adi &nbsp @k.TBL_Yazar.Yazar_Soyad</td>
+            <td>@k.TBL_Kategori.Kategori_Adi</td>
+            <td>@k.Yayin_Evi</td>
+            <td>@k.Basim_Yili</td>
+            <td>@k.Durum</td>
+            <td>@Html.ActionLink("Sil", "KitaplarSil", new { id = k.ID }, new { @class = "btn btn-danger", onClick = "return confirm('Silmek Istiyor Musunuz?')" })</td>
+            <td><a href="/Kitaplar/KitaplarGetir/@k.ID" class="btn btn-success">Guncelle</a></td>
+        </tr>
+    }
+</table>
+<a href="/Kitaplar/KitaplarEkle" class="btn btn-primary">Yeni Kitap Ekle</a>

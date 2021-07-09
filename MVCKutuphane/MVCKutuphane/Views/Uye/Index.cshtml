@@ -1,0 +1,51 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Uyeler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Uyeler</h2>
+
+@using (Html.BeginForm("Index", "Uye", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak Uye adini giriniz: &nbsp</b> @Html.TextBox("a")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Uye ID</th>
+        <th>Uye Adi</th>
+        <th>Uye Soyadi</th>
+        <th>Uye Mail</th>
+        <th>Kullanici Adi</th>
+        <th>Durum</th>
+        <th>Odunc Durum</th>
+        <th>Sifre</th>
+        <th>Tur</th>
+        <th>Ban</th>
+        <th>Guncelle</th>
+    </tr>
+    @foreach (var uye in Model)
+    {
+        <tr>
+            <td>@uye.ID</td>
+            <td>@uye.Uye_Adi</td>
+            <td>@uye.Uye_Soyadi</td>
+            <td>@uye.Uye_Mail</td>
+            <td>@uye.Kullanici_Adi</td>
+            <td>@uye.Durum</td>
+            <td>@uye.OduncDurum</td>
+            <td>@uye.Sifre</td>
+            <td>@uye.Tur</td>
+            <td>@Html.ActionLink("Ban", "UyeSil", new { id = uye.ID }, new { @class = "btn btn-danger", onClick = "return confirm('Bu Uyeyi Banlamak Istiyor Musunuz?')" })</td>
+            <td><a href="/Uye/UyeGetir/@uye.ID" class="btn btn-success">Guncelle</a></td>
+        </tr>
+    }
+
+</table>
+<a href="/Uye/UyeEkle/" class="btn btn-primary">Yeni Uye Ekle</a>
+

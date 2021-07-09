@@ -1,0 +1,22 @@
+﻿@model MVCKutuphane.Models.Entity.TBL_Kategori
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Kategori Ekleme Sayfasi</h2>
+
+<form class="form-group" method="post">
+    <div>
+        <label>Kategori Adi</label>
+        <input type="text" class="form-control" name="Kategori_Adi" maxlength="20" min="2" required="" />
+    </div>
+    <div>
+        <label>Aciklama</label>
+        <input type="text" class="form-control" name="Aciklama" maxlength="80" min="2" required="" />
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-info" id="BtnEkle">Kategori Ekle</button>
+    </div>
+</form>
+

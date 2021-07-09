@@ -1,0 +1,46 @@
+﻿@model MVCKutuphane.Models.Entity.TBL_Uyeler
+@{
+    ViewBag.Title = "UyeGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Uye Guncelle</h2>
+
+@using (Html.BeginForm("UyeGuncelle", "Uye", FormMethod.Post))
+{
+    <div style="margin-bottom:15px"></div>
+    <div class="form-group">
+        @Html.LabelFor(k => k.ID)
+        @Html.TextBoxFor(k => k.ID, new { @class = "form-control", @readOnly = "readonly" })
+        <br />
+        @Html.LabelFor(k => k.Uye_Adi)
+        @Html.TextBoxFor(k => k.Uye_Adi, new { @class = "form-control", maxlength = 15, minlength = 2, required = "" })
+        <br />
+        @Html.LabelFor(k => k.Uye_Soyadi)
+        @Html.TextBoxFor(k => k.Uye_Soyadi, new { @class = "form-control", maxlength = 20, minlength = 2, required = "" })
+        <br />
+        <br />
+        @Html.LabelFor(k => k.Uye_Mail)
+        @Html.TextBoxFor(k => k.Uye_Mail, new { @class = "form-control", maxlength = 30, minlength = 12, required = "" , @readOnly = "readonly" })
+        <br />
+        <br />
+        @Html.LabelFor(k => k.Kullanici_Adi)
+        @Html.TextBoxFor(k => k.Kullanici_Adi, new { @class = "form-control", maxlength = 20, minlength = 4, required = "", @readOnly = "readonly" })
+        <br />
+        <br />
+        @Html.LabelFor(k => k.Sifre)
+        @Html.TextBoxFor(k => k.Sifre, new { @class = "form-control", maxlength = 16, minlength = 8, required = "" })
+        <br />
+        <br />
+        @Html.LabelFor(k => k.ipucu)
+        @Html.TextBoxFor(k => k.ipucu, new { @class = "form-control", maxlength = 100, minlength = 1, required = "" })
+        <br />
+    </div>
+    <div>
+        <button class="btn btn-warning">Guncelle</button>
+    </div>
+    <input type="hidden" name="Durum" value="True" />
+    <input type="hidden" name="Tur" value= 1 />
+}
+
+

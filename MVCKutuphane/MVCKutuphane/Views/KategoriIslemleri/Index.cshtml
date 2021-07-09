@@ -1,0 +1,31 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBL_Kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutKullanici.cshtml";
+}
+
+<h2>Kategori</h2>
+
+@using (Html.BeginForm("Index", "KategoriIslemleri", FormMethod.Get))
+{
+    <div style="margin-bottom:15px;margin-top:15px;">
+        <b>Aranacak Kategori adini giriniz: &nbsp</b> @Html.TextBox("parametre")
+        <input type="submit" value="Ara" />
+    </div>
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <td>Kategori Adı</td>
+        <td>Aciklama</td>
+    </tr>
+    @foreach (var k in Model)
+    {   
+            <tr>
+                <td>@k.Kategori_Adi</td>
+                <td>@k.Aciklama</td>
+            </tr>
+    }
+</table>

@@ -1,0 +1,57 @@
+﻿@model MVCKutuphane.Models.Entity.TBL_Uyeler
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutKullanici.cshtml";
+}
+
+<h2>Profilim</h2>
+
+@using (Html.BeginForm("Index2", "UyePaneli", FormMethod.Post)) 
+{ 
+<table class="table table-hover">
+    <tr>
+        <td>
+            <label style="font-weight:bolder">Kullanici Adi</label>
+            @HttpContext.Current.User.Identity.Name
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.Uye_Adi)
+            @Html.TextBoxFor(x => x.Uye_Adi, new { @class = "form-control", maxlength = 15, minlength = 2, required = "" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.Uye_Soyadi)
+            @Html.TextBoxFor(x => x.Uye_Soyadi, new { @class = "form-control", maxlength = 20, minlength = 2, required = "" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.Uye_Mail)
+            @Html.TextBoxFor(x => x.Uye_Mail, new { @class = "form-control", maxlength = 30, minlength = 12, required = "", @readOnly = "readonly" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.Sifre)
+            @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control", maxlength = 16, minlength = 8, required = "" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(x => x.ipucu)
+            @Html.TextBoxFor(x => x.ipucu, new { @class = "form-control", maxlength = 16, minlength = 1, required = "" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-warning">Bilgileri Guncelle</button>
+        </td>
+    </tr>
+
+</table>
+}
+
+
